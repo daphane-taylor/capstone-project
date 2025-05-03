@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/items/item_list.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="items-container">
+	<div class="collection-items">
+		<h3>Collection Records</h3>
+		<a href="{% url 'item_create' %}" class="button">Create New Record</a>
+	</div>
+
+	<div class="text">
+		<h6>You're currently viewing all records in your collection.</h6>
+	</div>
+
+    <div class="all_records">
+        {% if items %}
+        <div class="table-responsive">
+            <table class="items-table">
+                <thead>
+					<tr>
+						<th>Date Collected</th>
+                        <th>Name</th>
+                        <th>A.K.A</th>
+						<th>Color</th>
+                        <th>Type</th>
+                        <th>Size</th>
+						<th>Value</th>
+                        <th class="action-title">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+						<td>{{ item.date_collected }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.other_names }}</td>
+                        <td>{{ item.color }}</td>
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.size }}</td>
+                        <td>${{ item.value }}</td>
+						<td class="actions">
+                            <a href="{% url 'item_detail' item.id %}" class="action-btn view-btn" title="View Details"> View More</a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'item_update' item.id %}" class="action-btn edit-btn" title="Edit"> Edit</a>
+                            <a href="{% url 'item_delete' item.id %}" class="action-btn delete-btn" title="Delete">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-items">
+            <p>No collection records have been added yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

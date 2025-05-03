@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/notes/notes_list.css' %}">
+{% endblock css %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+<div class="notes-container">
+	<div class="notes-list">
+		<div class="notes-header">
+			<h3>Collection Notes</h3>
+			<a href="{% url 'note_create' %}" class="button">Create New Note</a>
+		</div>
+
+		<div class="all_notes">
+			{% for note in note_list %}
+			<div class="note_card">
+				<h4 class="note_title">{{ note.title }}</h4>
+				{% if note.image %}
+				<img src="{{note.image.url}}">
+				{% endif %}
+				<p class="note_description">{{ note.content|truncatechars:100 }}</p>
+				<label>Created on: {{ note.created_on }}</label>
+				
+				<div class="card-buttons">
+					<a href="{% url 'note_detail' note.pk %}" class="card-btn view-btn">View Details</a>
+					{% if user.is_authenticated %}
+					<a href="{% url 'note_delete' note.pk %}" class="card-btn delete-btn">Delete</a>
+					{% endif %}
+				</div>
+			</div>
+			{% empty %}
+			<p>No notes available.</p>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

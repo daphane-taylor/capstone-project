@@ -1,0 +1,135 @@
+/* LOGIN STYLES */
+.login-container {
+	max-width: 400px;
+	margin: 30px auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+}
+
+.form-row {
+	margin-bottom: 15px;
+}
+
+.form-row label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-row input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.form-row button {
+	padding: 10px 15px;
+	background-color: var(--button-color);
+	color: var(--secondary-text-color);
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+.links {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.error-message {
+	color: red;
+	margin-bottom: 15px;
+}
+
+
+/*SIGNUP STYLES */
+.signup-container {
+	max-width: 400px;
+	margin: 30px auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+}
+
+.form-row {
+	margin-bottom: 15px;
+}
+
+.form-row label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-row input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.form-row button {
+	padding: 10px 15px;
+	background-color: var(--button-color);
+	color: var(--secondary-text-color);
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+.form-hint {
+	display: block;
+	margin-top: 5px;
+	font-size: 0.8em;
+	color: #666;
+}
+
+.links {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.error-message {
+	color: red;
+	margin-bottom: 15px;
+}
+
+/* CHANGE PASSWORD FORM STYLES */
+.password-change-container {
+	max-width: 400px;
+	margin: 30px auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+}
+
+.form-row {
+	margin-bottom: 15px;
+}
+
+.form-row label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-row input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.form-row button {
+	padding: 10px 15px;
+	background-color: var(--button-color);
+	color: var(--secondary-text-color);
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+.form-hint {
+	display: block;
+	margin-top: 5px;
+	font-size: 0.8em;
+	color: #666;
+}
+
+.error-message {
+	color: red;
+	margin-bottom: 15px;
+}

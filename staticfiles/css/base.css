@@ -1,0 +1,75 @@
+:root {
+	--text-color: #000000;
+	--secondary-text-color: #EDEBDF;
+	--background-color: #97968e;
+	--primary-color: #EDEBDF;
+	--link-color: #433c31;
+	--heading-color: #534e43;
+	--button-color: #534e43;
+
+	--nav-width-desktop: 20%;
+	--nav-width-tablet: 25%;
+	--nav-width-mobile: 100%;
+	--content-width-desktop: 80%;
+	--content-width-tablet: 75%;
+	--content-width-mobile: 100%;
+}
+
+html {
+	font-size: 16px;
+	font-family: Candara, 'sans-serif';
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	width: 100%;
+	overflow-x: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: var(--heading-color);
+	font-variant: small-caps;
+	font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--heading-color);
+}
+
+/* Media query for tablet */
+@media screen and (max-width: 1024px) {
+	html {
+	font-size: 14px;
+	}
+}
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+	html {
+	font-size: 12px;
+	}
+	
+	a {
+	font-size: 16px;
+	}
+}
+
+/* Ensure viewport is properly set */
+@media screen and (max-width: 480px) {
+	html {
+	font-size: 12px;
+	}
+}

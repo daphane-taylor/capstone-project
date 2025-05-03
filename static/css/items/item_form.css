@@ -1,0 +1,216 @@
+/* Full-width item_form.css to match the item details style */
+
+.form-container {
+    padding: 20px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    width: 95%;
+    max-width: none;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--background-color);
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    margin: 0;
+    color: var(--heading-color);
+}
+
+.item-form {
+    background-color: var(--primary-color);
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Form grid for create page - full width */
+form input {
+    background-color: #ffffff;
+    border: 1px solid var(--heading-color);
+    border-radius: 2px;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.form-field {
+    padding: 0;
+}
+
+.field-full {
+    grid-column: span 12;
+}
+
+.field-half {
+    grid-column: span 6;
+}
+
+.field-third {
+    grid-column: span 4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .field-half, .field-third {
+        grid-column: span 12;
+    }
+}
+
+/* Form row for update page - full width */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.form-group {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/* Simple column sizes - better for full width */
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Form field styles */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.error-alert, .alert {
+    padding: 10px 15px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Form buttons */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+/* Button styles */
+.button, .btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.back-btn {
+    color: #fff;
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color);
+}
+
+.update-btn {
+    color: #fff;
+    background-color: var(--background-color);
+    border: 1px solid var(--background-color);
+}
+
+.cancel-btn {
+	color: #fff;
+	background-color: var(--danger-color);
+	border: 1px solid var(--danger-color);
+}
+
+.create-btn {
+	color: #fff;
+	background-color: var(--background-color);
+	border: 1px solid var(--background-color);
+}
+/* Current image container */
+.current-image {
+    margin-bottom: 10px;
+}
+
+.current-image img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    display: block;
+    margin-bottom: 5px;
+    max-width: 100%;
+    height: auto;
+}
+
+.current-image p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Make sure desktop layout uses full width by default */
+@media (min-width: 768px) {
+    .item-form {
+        width: 100%;
+    }
+    
+    /* Override the 60% max-width in your existing CSS */
+    .item-form[style*="max-width: 60%"] {
+        max-width: 100% !important;
+    }
+}

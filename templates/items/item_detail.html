@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ item.name }}: Details{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/items/item_detail.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="item-detail-container">
+    <div class="item-header">
+        <h2>{{ item.name }}</h2>
+        {% if user.is_authenticated %}
+        <div class="item-actions">
+            <a href="{% url 'item_list' %}" class="back-btn btn">Back to List</a>
+            <a href="{% url 'item_update' item.id %}" class="btn edit-btn">Edit Item</a>
+            <a href="{% url 'item_delete' item.id %}" class="btn delete-btn">Delete Item</a>
+        </div>
+        {% else %}
+        <div class="item-actions">
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="item-content">
+        <div class="item-image-container">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+            {% else %}
+            <div class="no-image">No image available</div>
+            {% endif %}
+        </div>
+
+        <div class="item-info">
+            <div class="info-row">
+                <div class="info-label">Name:</div>
+                <div class="info-value">{{ item.name }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Also Known As:</div>
+                <div class="info-value">{{ item.other_names|default:"--" }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Date Collected:</div>
+                <div class="info-value">{{ item.date_collected }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Current Value:</div>
+                <div class="info-value">${{ item.value }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Color:</div>
+                <div class="info-value">{{ item.color }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Type:</div>
+                <div class="info-value">{{ item.type }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Size:</div>
+                <div class="info-value">{{ item.size }}</div>
+            </div>
+            <div class="info-row description">
+                <div class="info-label">Description:</div>
+                <div class="info-value">{{ item.description }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments">
+        {% for cmt in comments %}
+        <div class="comment">
+            <label class="user">{{ cmt.author.username }}</label>
+            <label class="date">{{ cmt.created_on }}</label>
+            <p>{{ cmt.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="comment">
+        <form method="post" action="{% url 'create_comment' %}" class="comment-form">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <textarea name="content" rows="3" placeholder="Add a comment..." required></textarea>
+            <button type="submit" class="post-btn">Post Comment</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

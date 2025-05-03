@@ -1,0 +1,30 @@
+<div class="navigation-panel">
+    <div class="nav-header">
+        <h3>Collection Database</h3>
+        <label for="nav-toggle" class="hamburger-label">
+            <span class="hamburger-icon"></span>
+        </label>
+    </div>
+    
+    <div class="main-navbar">
+        <nav>
+            <a class="nav-link" href="{% url 'home' %}">- dashboard</a>
+            <a class="nav-link" href="{% url 'item_list' %}">- view collection</a>
+            <a class="nav-link" href="{% url 'note_list' %}">- view notes</a>
+            <a class="nav-link" href="#">- view reports</a>
+            <a class="nav-link" href="#">- archived records</a>
+            <a class="nav-link" href="{% url 'about' %}">- user guide</a>
+            <a class="nav-link" href="{% url 'contact' %}">- contact developer</a>
+        </nav>
+    </div>
+    
+    <!-- Mobile auth links - will appear at the bottom when menu is expanded -->
+    <div class="mobile-auth-links">
+        <nav class="auth-links">
+            <a href="{% url 'login' %}" class="auth-link">login</a>
+            <a href="{% url 'signup' %}" class="auth-link">signup</a>
+            <a href="{% url 'logout' %}" class="auth-link">logout</a>
+            <a href="{% url 'password_change' %}" class="auth-link">change password</a>
+        </nav>
+    </div>
+</div>

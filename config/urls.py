@@ -16,9 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from pages.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('', include('pages.urls')),
+	path('home/', HomeView.as_view(), name='home'),
+	path('', HomeView.as_view(), name='root'),
 	path('items/', include('items.urls')),
-]
+	path('accounts/', include('accounts.urls')),
+	path('notes/', include('notes.urls')),
+	path('pages/', include('pages.urls')),
+	]
+
+# for images
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

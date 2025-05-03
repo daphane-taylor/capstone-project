@@ -1,0 +1,128 @@
+.notes-container {
+	background-color: var(--primary-color);
+	border: 2px solid var(--background-color);
+	border-radius: 2px;
+	width: 95%;
+	margin: 20px auto;
+}
+
+.notes_list {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.notes-header {
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+    border-bottom: 1px solid var(--background-color);
+}
+.all_notes {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+
+.notes_list a {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.note_card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--transparent-background);
+	border: 2px solid var(--background-color);
+	border-radius: 5px;
+	width: 30%;
+	min-height: 300px;
+	margin: 1rem;
+	padding: 0.5rem;
+	text-align: center;
+}
+
+.note_card:hover {
+    background-color: var(--hover-color);
+    transition: background-color 0.3s ease;
+}
+
+.note_title{
+	margin-bottom: 0.5rem;
+}
+
+.note_card img {
+	width: 200px;
+	height: auto;
+	object-fit: cover;
+	border-radius: 2px;
+	margin-bottom: 1rem;
+}
+
+.note_description {
+	margin-top: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Card button styles */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    width: 100%;
+}
+
+.card-btn {
+    background-color: var(--button-color);
+    color: var(--secondary-text-color);
+    border: 1px solid var(--background-color);
+    border-radius: 2px;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    font-variant: small-caps;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.view-btn {
+    background-color: var(--button-color);
+}
+
+.delete-btn {
+    background-color: var(--danger-color);
+}
+
+/* Media query for tablet */
+@media screen and (max-width: 1024px) {
+    .note_card {
+        width: 45%;
+    }
+}
+
+/* Media query for mobile */
+@media screen and (max-width: 768px) {
+    .note_card {
+        width: 100%;
+    }
+    
+    .card-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card-btn {
+        width: 80%;
+        margin-bottom: 0.5rem;
+    }
+}

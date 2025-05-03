@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/notes/notes_detail.css' %}">
+{% endblock css %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+	<div class="detail-container">
+	<div class="detail-header">
+		<h2>Note Details</h2>
+		{% if user.is_authenticated %}
+		<div class="detail-actions">
+			<a href="{% url 'note_list' %}" class="button back-btn">Back to Notes</a>
+			<a href="{% url 'note_update' note.pk %}" class="button edit-btn">Edit Note</a>
+			<a href="{% url 'note_delete' note.pk %}" class="button delete-btn">Delete Note</a>
+		</div>
+		{% else %}
+		<div class="detail-actions">
+			<a href="{% url 'note_list' %}" class="button back-btn">Back to Notes</a>
+		</div>
+		{% endif %}
+	</div>
+
+
+	<div class="note-detail">
+		<h3 class="detail-title">{{ note.title }}</h3>
+		
+		<div class="detail-content">
+			<p>{{ note.content }}</p>
+		</div>
+		
+		<div class="detail-meta">
+			<label>Created on: {{ note.created_on }}</label>
+		</div>
+	</div>
+	</div>
+{% endblock content %}

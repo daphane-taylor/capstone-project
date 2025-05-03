@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete {{ item.name }}{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/items/item_delete.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="delete-container">
+    <div class="delete-card">
+        <div class="delete-header">
+            <h2>Confirm Deletion</h2>
+        </div>
+        
+        <div class="delete-content">
+            <div class="warning-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            
+            <p class="delete-message">
+                Are you sure you want to delete the item "<strong>{{ item.name }}</strong>"?
+            </p>
+            
+            <p class="delete-warning">
+                This action cannot be undone. All information associated with this item will be permanently removed.
+            </p>
+            
+            <div class="item-summary">
+                <div class="summary-row">
+                    <span class="summary-label">Name:</span>
+                    <span class="summary-value">{{ item.name }}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Type:</span>
+                    <span class="summary-value">{{ item.type }}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Value:</span>
+                    <span class="summary-value">${{ item.value }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="delete-actions">
+            <form method="post">
+                {% csrf_token %}
+                <a href="{% url 'item_detail' item.id %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/notes/notes_update.css' %}">
+{% endblock css %}
+
+{% block title %}Update Note{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="form-container">
+	<h3>Update Note</h3>
+	<form method="post" enctype="multipart/form-data" class="note-form">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div class="form-row">
+			<button type="submit">Update Note</button>
+		<a href="{% url 'note_detail' note.pk %}" class="button cancel-btn">Cancel</a>
+		</div>
+	</form>
+</div>
+{% else %}
+<div class="form-container">
+	<h3>Authentication Required</h3>
+	<p>You must be logged in to update notes.</p>
+	<a href="{% url 'note_list' %}" class="back-link">Back to Notes</a>
+</div>
+{% endif %}
+{% endblock content %}

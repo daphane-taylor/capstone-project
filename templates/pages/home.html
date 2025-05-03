@@ -4,16 +4,90 @@
 
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/activity_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/pages/summary_cards.css' %}">
 {% endblock css %}
 
 {% block content %}
-<h1>Welcome to your Collection Database</h1>
-<p>Use the navigation bar to explore your collection.</p>
+<div class="search-panel">
+    <form action="{% url 'item_list' %}" method="GET" class="d-flex">
+        <div class="input-group">
+            <input name="search" type="text" class="form-control search" placeholder="Search..." size="40">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-light">Search</button>
+            </div>
+        </div>
+    </form>
+    <div class="login-out-menu">
+        <nav class="auth-links">
+            <a href="{% url 'login' %}" class="auth-link">login</a> |
+            <a href="{% url 'signup' %}" class="auth-link">signup</a> |
+            <a href="{% url 'logout' %}" class="auth-link">logout</a> |
+            <a href="{% url 'password_change' %}" class="auth-link">change password</a>
+        </nav>
+    </div>
+</div>
 
+<div class="dashboard-cards">
+    <h3>Collection Summary</h3>
+
+    <div class="card-container">
+        <div class="card">
+            <h4>total records</h4>
+            <p class="card-value">{{ total_items }}</p>
+            <p class="card-description">records in your collection</p>
+        </div>
+
+        <div class="card">
+            <h4>total notes</h4>
+            <p class="card-value">{{ total_notes }}</p>
+            <p class="card-description">notes in your collection</p>
+        </div>
+    </div>
+
+<div class="recent-activity">
+    <h3>Recent Activity</h3>
+    
+    {% if recent_activities %}
+        <div class="activity-list">
+            {% for activity in recent_activities %}
+                <div class="activity-item">
+                    <p class="activity-icon">
+                        {% if activity.activity_type == 'create' %}
+                            <span class="activity-create-icon">✨</span>
+                        {% else %}
+                            <span class="activity-view-icon">👁️</span>
+                        {% endif %}
+                    </p>
+                    <p class="activity-user">{{ activity.user.username }}</p>
+                    <p class="activity-action">{{ activity.get_activity_type_display }}</p>
+                    <p class="activity-object">
+                        {% if activity.item %}
+                            <a href="{% url 'item_detail' activity.item.id %}">{{ activity.item.name }}</a>
+                        {% else %}
+                            <a href="{% url 'note_detail' activity.note.pk %}">{{ activity.note.title }}</a>
+                        {% endif %}
+                    </p>
+                    <p class="activity-time">{{ activity.timestamp|timesince }} ago</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-activity">No recent activity to display.</p>
+    {% endif %}
+</div>
+
+<div class="create-menu">
+    <nav>
+        <a href="{% url 'item_create' %}">add new item</a> |
+        <a href="{% url 'note_create' %}">add new note</a> |
+        <a href="">add new category</a> |
+        <a href="">add new collection</a>
+    </nav>
+</div>
+{% endblock content %}
 
 {% block js %}
 <script src="{% static 'js/home.js' %}"></script>
 {% endblock js %}
-
-{% endblock content %}

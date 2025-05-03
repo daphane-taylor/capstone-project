@@ -12,6 +12,23 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Use environment variables
+SECRET_KEY = os.environ.get('MRcZwmgbFyKM3C_vaX0RneafHin50bgzQnb7t-pi6Muc_yJIirgGdDi4C_plQ35TNcs')
+DEBUG = os.environ.get('DEBUG') == 'True'
+
+# Email settings
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS') == 'True'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +57,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'pages',
 	'items',
+	'accounts',
+	'notes',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'  # Where to redirect after successful login
+LOGOUT_REDIRECT_URL = 'home'  # Where to redirect after logout
+LOGIN_URL = 'login'  # URL name for the login page

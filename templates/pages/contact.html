@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pages/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/items/item_form.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-header">
+        <h2>Contact Us</h2>
+    </div>
+
+    <form method="post" class="contact-form">
+        {% csrf_token %}
+        
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% endif %}-alert message">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="form-grid">
+            <div class="form-field field-half">
+                <label for="{{ form.name.id_for_label }}">Name*</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="error-message">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-field field-half">
+                <label for="{{ form.email.id_for_label }}">Email*</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="error-message">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+        
+            <div class="form-field field-third">
+                <label for="{{ form.phone.id_for_label }}">Phone Number (Optional)</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                <div class="error-message">{{ form.phone.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-field field-third">
+                <label for="{{ form.extension.id_for_label }}">Extension (Optional)</label>
+                {{ form.extension }}
+                {% if form.extension.errors %}
+                <div class="error-message">{{ form.extension.errors }}</div>
+                {% endif %}
+            </div>
+
+
+            <div class="form-field field-full">
+                <label for="{{ form.subject.id_for_label }}">Subject*</label>
+                {{ form.subject }}
+                {% if form.subject.errors %}
+                <div class="error-message">{{ form.subject.errors }}</div>
+                {% endif %}
+            </div>
+        
+            <div class="form-field field-full">
+                <label for="{{ form.message.id_for_label }}">Message*</label>
+                {{ form.message }}
+                {% if form.message.errors %}
+                <div class="error-message">{{ form.message.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="form-buttons">
+            <div class="left-buttons">
+                <a href="{% url 'home' %}" class="back-btn button">Back</a>
+                <button type="reset" class="clear-btn button">Clear Form</button>
+            </div>
+            <div class="right-buttons">
+                <button type="submit" class="send-btn button">Send Message</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
