@@ -1,25 +1,36 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.views import View
+from django.views.generic import CreateView
+from .forms import SignupForm
+from .models import Profile
+from django.urls import reverse_lazy
 
-def signup_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            messages.success(request, f'Account created for {username}!')
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+class SignupView(CreateView):
+    template_name = 'accounts/signup.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
 
-def login_view(request):
-    if request.method == 'POST':
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        passw = form.cleaned_data.get('password')
+        user.set_password(passw)
+        user.save()
+
+        # Create an empty profile for the user
+        Profile.objects.create(user=user)
+
+        return super().form_valid(form)
+
+class LoginView(View):
+    template_name = 'accounts/login.html'
+    
+    def get(self, request):
+        return render(request, self.template_name)
+    
+    def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
@@ -28,4 +39,5 @@ def login_view(request):
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
-    return render(request, 'accounts/login.html')
+        return render(request, self.template_name)
+    
