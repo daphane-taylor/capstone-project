@@ -1,0 +1,88 @@
+/* Activity list styling */
+.activity-list {
+    display: flex;
+    flex-direction: column; 
+    width: 90%;
+    margin: 0.5rem auto;
+    gap: 10px;
+}
+
+.activity-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: var(--transparent-background);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+}
+
+.activity-item:hover {
+    background-color: var(--hover-color);
+    transition: background-color 0.3s ease;
+}
+
+.activity-icon {
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.activity-user {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    color: var(--heading-color);
+}
+
+.activity-action {
+    color: var(--text-color);
+    margin-right: 0.5rem;
+}
+
+.activity-object {
+    margin-right: 0.5rem;
+}
+
+.activity-object a {
+    color: var(--heading-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.activity-object a:hover {
+    text-decoration: underline;
+}
+
+.activity-time {
+    color: var(--text-color);
+    margin-left: auto;
+    font-size: 0.85em;
+}
+
+.no-activity {
+    text-align: center;
+    color: var(--secondary-text-color);
+    margin: 2rem 0;
+    font-style: italic;
+}
+
+/* Mobile adjustments for activity items */
+@media screen and (max-width: 768px) {
+    .activity-item {
+        flex-wrap: wrap;
+    }
+    
+    .activity-icon {
+        margin-right: 0.5rem;
+    }
+    
+    .activity-user {
+        margin-right: 0.3rem;
+    }
+    
+    .activity-time {
+        width: 100%;
+        margin-top: 0.5rem;
+        text-align: right;
+    }
+}

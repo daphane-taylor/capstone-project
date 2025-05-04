@@ -6,6 +6,9 @@
 	--link-color: #433c31;
 	--heading-color: #534e43;
 	--button-color: #534e43;
+	--danger-color: #8B4513;
+	--transparent-background: #b8af9ce7;
+	--hover-color: #ad9f80;
 
 	--nav-width-desktop: 20%;
 	--nav-width-tablet: 25%;
@@ -29,8 +32,39 @@ html {
 body {
 	background-color: var(--background-color);
 	color: var(--text-color);
+}
+/* Page Container */
+.dashboard-container {
+	display: flex;
+	flex-direction: row;
 	width: 100%;
-	overflow-x: hidden;
+}
+
+/* Content container */
+.content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	min-height: 100vh;
+}
+
+/* Navigation panel */
+.navigation-panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: var(--primary-color);
+	border: 2px solid var(--background-color);
+	border-radius: 2px;
+	width: var(--nav-width-desktop);
+	height: 100vh;
+	font-size: 1.3rem;
+	position: sticky;
+	top: 0;
+	bottom: 0;
 }
 
 a {
@@ -49,27 +83,166 @@ h6 {
 	color: var(--heading-color);
 }
 
-/* Media query for tablet */
-@media screen and (max-width: 1024px) {
-	html {
-	font-size: 14px;
-	}
+/* CSS-only Hamburger Menu */
+
+/* Hide the checkbox that controls the hamburger menu */
+#nav-toggle {
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+
+/* Hamburger menu button - only for mobile */
+.nav-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+}
+
+.hamburger-label {
+	display: none; /* Hidden by default, shown only on mobile */
+	cursor: pointer;
+	position: relative;
+	width: 30px;
+	height: 20px;
+	z-index: 2;
+}
+
+/* Hamburger icon using pure CSS */
+.hamburger-icon, 
+.hamburger-icon:before, 
+.hamburger-icon:after {
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	background-color: var(--heading-color);
+	transition: all 0.3s ease;
+}
+
+.hamburger-icon {
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.hamburger-icon:before {
+	content: '';
+	top: -8px;
+}
+
+.hamburger-icon:after {
+	content: '';
+	bottom: -8px;
+}
+
+/* Animation for menu icon when active */
+#nav-toggle:checked ~ .dashboard-container .hamburger-label .hamburger-icon {
+	background-color: transparent;
+}
+
+#nav-toggle:checked ~ .dashboard-container .hamburger-label .hamburger-icon:before {
+	top: 0;
+	transform: rotate(45deg);
+}
+
+#nav-toggle:checked ~ .dashboard-container .hamburger-label .hamburger-icon:after {
+	bottom: 0;
+	transform: rotate(-45deg);
+}
+
+/* Mobile auth links container */
+.mobile-auth-links {
+	display: none; /* Hidden on desktop */
+	margin-top: auto; /* Push to bottom */
+	padding: 1rem;
+	width: 100%;
+}
+
+.mobile-auth-links .auth-links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.mobile-auth-links .auth-link {
+	margin: 0.5rem 0;
+	width: 100%;
+	padding: 0.5rem 0;
 }
 
 /* Media query for mobile */
 @media screen and (max-width: 768px) {
-	html {
-	font-size: 12px;
+	.dashboard-container {
+	flex-direction: column;
 	}
 	
-	a {
-	font-size: 16px;
+	.navigation-panel {
+	width: var(--nav-width-mobile);
+	height: auto;
+	position: relative;
+	padding-bottom: 0;
 	}
-}
-
-/* Ensure viewport is properly set */
-@media screen and (max-width: 480px) {
-	html {
-	font-size: 12px;
+	
+	/* Show hamburger label on mobile */
+	.hamburger-label {
+	display: block;
+	}
+	
+	/* Hide navigation by default on mobile */
+	.navigation-panel .main-navbar {
+	display: none;
+	}
+	
+	/* Show navigation when checkbox is checked */
+	#nav-toggle:checked ~ .dashboard-container .navigation-panel .main-navbar {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	}
+	
+	/* Make nav links stack vertically on mobile */
+	.main-navbar nav {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	}
+	
+	/* Style mobile auth links to display at bottom of menu */
+	.mobile-auth-links {
+	display: none; /* Still hidden by default */
+	border-top: 1px solid var(--background-color);
+	margin-top: 1rem;
+	padding-top: 1rem;
+	}
+	
+	/* Show mobile auth links when menu is expanded */
+	#nav-toggle:checked ~ .dashboard-container .navigation-panel .mobile-auth-links {
+	display: flex;
+	}
+	
+	/* Hide desktop login-out-menu on mobile */
+	.search-panel .login-out-menu {
+	display: none;
+	}
+	
+	.content-container {
+	width: var(--content-width-mobile);
+	}
+	
+	/* Ensure search bar remains visible */
+	.search-panel {
+	flex-direction: column;
+	align-items: flex-start;
+	}
+	
+	form.d-flex {
+	width: 100%;
+	}
+	
+	.input-group {
+	width: 100%;
 	}
 }
