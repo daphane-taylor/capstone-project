@@ -43,9 +43,8 @@ SECRET_KEY = 'django-insecure-(hiwu9qn*k7!=l930k)x8(o1o%65hc_m(tz--eauwfyk0z66#x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['glacial-taiga-59622-2f98b0705abe.herokuapp.com']
+				 
 # Application definition
 
 INSTALLED_APPS = [
