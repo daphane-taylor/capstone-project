@@ -1,0 +1,44 @@
+.guide-container {
+	width: 95%;
+    padding: 20px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    margin: 20px auto;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--background-color);
+    margin-bottom: 20px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--transparent-background);
+	border-radius: 5px;
+	width: 100%;
+	padding: 20px;
+	margin: 10px 0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+	background-color: var(--hover-color);
+	transition: background-color 0.3s ease;
+	color: var(--primary-color);
+}
+
+.card-title {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.card p {
+	text-align: center;
+}

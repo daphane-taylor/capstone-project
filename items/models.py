@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from categories.models import Collection  # Import the Collection model from your collections app
 
 # Create your models here.
 class Item(models.Model):
@@ -14,10 +15,10 @@ class Item(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='items/', null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    collections = models.ManyToManyField(Collection, blank=True, related_name='items')
     
     def __str__(self):
         return self.name
-
 
 
 class CollectionComment(models.Model):
@@ -30,22 +31,27 @@ class CollectionComment(models.Model):
         return self.item.name + " - " + self.content[0:40]
 
 
-
 class Activity(models.Model):
     ACTIVITY_TYPES = (
         ('create', 'Created new item'),
         ('view', 'Viewed item details'),
         ('delete', 'Deleted item'),
+        ('add_to_collection', 'Added item to collection'),
+        ('remove_from_collection', 'Removed item from collection'),
     )
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES)
+    activity_type = models.CharField(max_length=25, choices=ACTIVITY_TYPES)
     timestamp = models.DateTimeField(default=timezone.now)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, null=True, blank=True)
     
     class Meta:
         ordering = ['-timestamp']
         verbose_name_plural = 'Activities'
     
     def __str__(self):
-        return f"{self.user.username} {self.get_activity_type_display()}: {self.item.name}"
+        base_str = f"{self.user.username} {self.get_activity_type_display()}: {self.item.name}"
+        if self.collection and self.activity_type in ['add_to_collection', 'remove_from_collection']:
+            return f"{base_str} in collection '{self.collection.name}'"
+        return base_str

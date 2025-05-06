@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 	'items',
 	'accounts',
 	'notes',
+	'categories',
 ]
 
 MIDDLEWARE = [

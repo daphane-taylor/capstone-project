@@ -19,7 +19,7 @@
 }
 
 html {
-	font-size: 16px;
+	font-size: 14px;
 	font-family: Candara, 'sans-serif';
 }
 
@@ -61,7 +61,7 @@ body {
 	border-radius: 2px;
 	width: var(--nav-width-desktop);
 	height: 100vh;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	position: sticky;
 	top: 0;
 	bottom: 0;

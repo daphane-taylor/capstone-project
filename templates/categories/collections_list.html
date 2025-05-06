@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Collections{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/categories/collection_.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="items-container">
+    <div class="collection-items">
+        <h1>Collections</h1>
+        {% if user.is_authenticated %}
+        <div class="text">
+            <a href="{% url 'collection_create' %}" class="btn">Create New Collection</a>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if collections %}
+        <div class="collection-grid">
+            {% for collection in collections %}
+            <div class="collection-card">
+                <div class="collection-header">
+                    <h3 class="collection-title">{{ collection.name }}</h3>
+                    <div class="collection-actions">
+                        <a href="{% url 'collection_detail' collection.pk %}" class="action-btn view-btn">View</a>
+                        {% if user.is_authenticated and user == collection.user %}
+                        <a href="{% url 'collection_update' collection.pk %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'collection_delete' collection.pk %}" class="action-btn delete-btn">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="collection-meta">
+                    <p>{{ collection.item_count }} items</p>
+                    <p>Created: {{ collection.created_on|date:"M d, Y" }}</p>
+                </div>
+                <p>{{ collection.description|truncatechars:100 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-items">
+            <p>No collections available.</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'collection_create' %}" class="btn">Create Your First Collection</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}
