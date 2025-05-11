@@ -20,4 +20,4 @@ class ItemCollectionForm(forms.Form):
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         if user:
-            self.fields['collection'].queryset = Collection.objects.filter(user=user)
+            self.fields['collections'].queryset = Collection.objects.filter(user=user)

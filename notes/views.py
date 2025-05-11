@@ -23,6 +23,11 @@ class NotesList(ListView):
     template_name = 'notes/list.html'
     context_object_name = 'note_list'
     ordering = ['-created_on']
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Note.objects.filter(user=self.request.user).order_by('-created_on')
+        return Note.objects.none()
 	
 
 

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Collection{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/categories/collection_create.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-header">
+        <h1>Create New Collection</h1>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Collection Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+            <div class="error">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Description</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+            <div class="error">{{ form.description.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-actions">
+            <a href="{% url 'collection_list' %}" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-submit">Create</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

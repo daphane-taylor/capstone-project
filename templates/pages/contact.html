@@ -36,14 +36,6 @@
                 {% endif %}
             </div>
             
-            <div class="form-field field-half">
-                <label for="{{ form.email.id_for_label }}">Email*</label>
-                {{ form.email }}
-                {% if form.email.errors %}
-                <div class="error-message">{{ form.email.errors }}</div>
-                {% endif %}
-            </div>
-        
             <div class="form-field field-third">
                 <label for="{{ form.phone.id_for_label }}">Phone Number (Optional)</label>
                 {{ form.phone }}
@@ -51,17 +43,27 @@
                 <div class="error-message">{{ form.phone.errors }}</div>
                 {% endif %}
             </div>
-
-            <div class="form-field field-third">
-                <label for="{{ form.extension.id_for_label }}">Extension (Optional)</label>
+            
+            <div class="form-field field-fourth">
+                <label for="{{ form.extension.id_for_label }}">Extension</label>
                 {{ form.extension }}
                 {% if form.extension.errors %}
                 <div class="error-message">{{ form.extension.errors }}</div>
                 {% endif %}
             </div>
 
+            <div class="form-field field-third">
+                <label for="{{ form.email.id_for_label }}">Email*</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="error-message">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+        
 
-            <div class="form-field field-full">
+
+
+            <div class="form-field field-half">
                 <label for="{{ form.subject.id_for_label }}">Subject*</label>
                 {{ form.subject }}
                 {% if form.subject.errors %}
@@ -71,7 +73,7 @@
         
             <div class="form-field field-full">
                 <label for="{{ form.message.id_for_label }}">Message*</label>
-                {{ form.message }}
+                <div class="message">{{ form.message }}</div>
                 {% if form.message.errors %}
                 <div class="error-message">{{ form.message.errors }}</div>
                 {% endif %}

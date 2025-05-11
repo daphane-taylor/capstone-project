@@ -4,11 +4,11 @@
 {% block title %}Collections{% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/categories/collection_.css' %}">
+<link rel="stylesheet" href="{% static 'css/categories/collection_list.css' %}">
 {% endblock css %}
 
 {% block content %}
-<div class="items-container">
+<div class="categories-container">
     <div class="collection-items">
         <h1>Collections</h1>
         {% if user.is_authenticated %}

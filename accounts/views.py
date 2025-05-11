@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.views import View
-from django.views.generic import CreateView
-from .forms import SignupForm
+from django.views.generic import CreateView, UpdateView, DetailView
+from django.contrib.auth.views import LogoutView
+from .forms import SignupForm, UpdateProfileForm
 from .models import Profile
 from django.urls import reverse_lazy
 
@@ -41,3 +42,31 @@ class LoginView(View):
             messages.error(request, 'Invalid username or password')
         return render(request, self.template_name)
     
+class ProfileUpdate(UpdateView):
+    model = Profile
+    template_name = 'accounts/update_profile.html'
+    form_class = UpdateProfileForm
+    success_url = reverse_lazy('home') # should be view profile
+
+    def get_object(self):
+        # return only the logged in user's profile
+        profile = Profile.objects.get(user=self.request.user)
+        return profile
+    
+    
+class ProfileView(DetailView):
+    model = Profile
+    template_name = 'accounts/profile.html'
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Profile.objects.filter(user=self.request.user).prefetch_related('user')
+        return Profile.objects.none()
+
+class LogoutView(LogoutView):
+    template_name = 'accounts/logout.html'
+    next_page = 'home'  # Redirect to home after logout
+
+    def get(self, request, *args, **kwargs):
+        messages.success(request, "You have been logged out successfully.")
+        return super().get(request, *args, **kwargs)

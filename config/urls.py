@@ -28,6 +28,8 @@ urlpatterns = [
 	path('accounts/', include('accounts.urls')),
 	path('notes/', include('notes.urls')),
 	path('pages/', include('pages.urls')),
+	path('categories/', include('categories.urls')),
+	
 	]
 
 # for images

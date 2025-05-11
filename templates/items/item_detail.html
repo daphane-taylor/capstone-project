@@ -72,13 +72,16 @@
     <div class="comments">
         {% for cmt in comments %}
         <div class="comment">
+            {% if cmt.author.profile.picture %}
+            <img src="{{ cmt.author.profile.first.picture.url }}" alt="{{ cmt.author.username }}" class="comment-author-image">
+            {% endif %}
             <label class="user">{{ cmt.author.username }}</label>
             <label class="date">{{ cmt.created_on }}</label>
             <p>{{ cmt.content }}</p>
         </div>
         {% endfor %}
     </div>
-
+    
     <div class="comment">
         <form method="post" action="{% url 'create_comment' %}" class="comment-form">
             {% csrf_token %}

@@ -2,23 +2,9 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items: flex-start;
-	width: 100%;
+	margin: 0 auto;
+	width: 100vw;
 }
-
-.left-buttons {
-	display: flex;
-	justify-content: flex-start;
-	padding-right: 36rem;
-}
-
-.right-buttons {
-	display: flex;
-	justify-content: flex-end;
-	padding-left: 34rem;
-	padding-right: 0.5rem;
-}
-
 .back-btn {
 	background-color: var(--background-color);
 	color: #fff;
@@ -33,4 +19,8 @@
 .send-btn {
 	background-color: var(--heading-color);
     color: #fff;
+}
+
+.message {
+	border: 1px solid var(--heading-color);
 }

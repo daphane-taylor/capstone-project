@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete Collection{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/categories/collection_delete.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="delete-container">
+    <div class="warning-icon">⚠️</div>
+    <h1>Delete Collection</h1>
+    <p class="delete-warning">Are you sure you want to delete this collection? This action cannot be undone.</p>
+    
+    <div class="collection-details">
+        <div class="collection-title">{{ collection.name }}</div>
+        <div class="item-count">This collection contains {{ collection.item_count }} items.</div>
+        <p><strong>Note:</strong> Items in this collection will not be deleted, they will just be removed from this collection.</p>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="delete-actions">
+            <a href="{% url 'collection_detail' collection.pk %}" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-delete">Delete Collection</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

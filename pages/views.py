@@ -14,18 +14,24 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        item_activities = ItemActivity.objects.select_related('user', 'item').all()[:10]
-        note_activities = NoteActivity.objects.select_related('user', 'note').all()[:10]
-        
-        combined_activities = sorted(
-            chain(item_activities, note_activities),
-            key=attrgetter('timestamp'),
-            reverse=True
-        )[:30]
-
-        context['total_items'] = Item.objects.count()
-        context['total_notes'] = Note.objects.count()
-        context['recent_activities'] = combined_activities
+        if self.request.user.is_authenticated:
+            item_activities = ItemActivity.objects.select_related('user', 'item').filter(user=self.request.user)[:10]
+            note_activities = NoteActivity.objects.select_related('user', 'note').filter(user=self.request.user)[:10]
+            
+            combined_activities = sorted(
+                chain(item_activities, note_activities),
+                key=attrgetter('timestamp'),
+                reverse=True
+            )[:30]
+            
+            context['total_items'] = Item.objects.filter(collections__user=self.request.user).distinct().count()
+            context['total_notes'] = Note.objects.filter(user=self.request.user).count()
+            context['recent_activities'] = combined_activities
+        else:
+            context['total_items'] = 0
+            context['total_notes'] = 0
+            context['recent_activities'] = []
+            
         return context
     
 class AboutView(TemplateView):

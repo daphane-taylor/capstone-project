@@ -28,13 +28,16 @@ class ItemListView(ListView):
     def get_queryset(self):
         search_text = self.request.GET.get('search', '')
         if search_text:
-            # Filter notes based on the search text
-            return Item.objects.filter(name__icontains=search_text)
-        
+            # Filter items based on the search text and the logged-in user
+            if self.request.user.is_authenticated:
+                return Item.objects.filter(name__icontains=search_text, collections__user=self.request.user).distinct()
+            return Item.objects.none()
         else:
-			# Filter notes by the logged-in user
-            return Item.objects.all()
-
+            # Filter items by the logged-in user
+            if self.request.user.is_authenticated:
+                return Item.objects.filter(collections__user=self.request.user).distinct()
+            return Item.objects.none()
+        
 
 class ItemDetailView(DetailView):
     model = Item
