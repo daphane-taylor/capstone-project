@@ -3,7 +3,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView
-from django.contrib.auth.views import LogoutView
 from .forms import SignupForm, UpdateProfileForm
 from .models import Profile
 from django.urls import reverse_lazy
@@ -63,10 +62,4 @@ class ProfileView(DetailView):
             return Profile.objects.filter(user=self.request.user).prefetch_related('user')
         return Profile.objects.none()
 
-class LogoutView(LogoutView):
-    template_name = 'accounts/logout.html'
-    next_page = 'home'  # Redirect to home after logout
-
-    def get(self, request, *args, **kwargs):
-        messages.success(request, "You have been logged out successfully.")
-        return super().get(request, *args, **kwargs)
+# Remove the custom LogoutView class as we're using Django's built-in LogoutView
