@@ -17,7 +17,7 @@
 .text {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: -20px;
+    margin-bottom: -15px;
     margin-top: 20px;
 }
 
@@ -26,7 +26,6 @@
     border-collapse: collapse;
     margin-top: 20px;
     background-color: var(--primary-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .items-table th, 
@@ -34,7 +33,6 @@
     padding: 12px 15px;
     border-top: 1px solid var(--background-color);
     border-bottom: 1px solid var(--background-color);
-    border-collapse: collapse;
     overflow-inline: clip;
 }
 
@@ -68,6 +66,7 @@
 .view-btn {
     background-color: var(--background-color);
     font-family: Candara, sans-serif;
+    min-width: max-content;
 }
 
 .edit-btn {
@@ -84,7 +83,7 @@
 .no-items {
     text-align: center;
     padding: 40px;
-    background-color: #f8f9fa;
+    background-color: var(--transparent-background);
     border-radius: 8px;
 }
 

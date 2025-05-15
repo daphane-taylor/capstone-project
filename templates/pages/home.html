@@ -22,7 +22,7 @@
     <div class="login-out-menu">
         <nav>
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' pk=user.id %}" class="auth-link">{{ user.username }}</a>
+                <a href="{% url 'profile' pk=user.profile.id %}" class="auth-link">{{ user.username }}</a>
                 <a href="{% url 'update_profile' %}" class="auth-link">update profile</a>
                 <a href="{% url 'password_change' %}" class="auth-link">change password</a>
                 <a href="{% url 'logout' %}" class="auth-link">logout</a>
@@ -39,15 +39,29 @@
     <h3>Collection Summary</h3>
 
     <div class="card-container">
-        <div class="card">
-            <h4>total records</h4>
-            <p class="card-value">{{ total_items }}</p>
-            <p class="card-description">records in your collection</p>
-        </div>
+        
+            <div class="card">
+                <h4>total records</h4>
+                <p class="card-value">
+                    <a href="{% url 'item_list' %}">{{ total_items }}</a>
+                </p>
+                <p class="card-description">records in your collection</p>
+            </div>
+
+        
+            <div class="card">
+                <h4>total collections</h4>
+                <p class="card-value">
+                    <a href="{% url 'collection_list' %}">{{ total_collections }}</a>
+                </p>
+                <p class="card-description">collections in your database</p>
+            </div>
 
         <div class="card">
             <h4>total notes</h4>
-            <p class="card-value">{{ total_notes }}</p>
+            <p class="card-value">
+                <a href="{% url 'note_list' %}">{{ total_notes }}</a>
+            </p>
             <p class="card-description">notes in your collection</p>
         </div>
     </div>

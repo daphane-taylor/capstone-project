@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -12,7 +12,6 @@ class SignupView(CreateView):
     form_class = SignupForm
     success_url = reverse_lazy('login')
 
-
     def form_valid(self, form):
         user = form.save(commit=False)
         passw = form.cleaned_data.get('password')
@@ -23,6 +22,7 @@ class SignupView(CreateView):
         Profile.objects.create(user=user)
 
         return super().form_valid(form)
+
 
 class LoginView(View):
     template_name = 'accounts/login.html'
@@ -38,9 +38,10 @@ class LoginView(View):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Invalid username or password')
-        return render(request, self.template_name)
+            error_message = 'Invalid username or password'
+            return render(request, self.template_name, {'error_message': error_message})
     
+
 class ProfileUpdate(UpdateView):
     model = Profile
     template_name = 'accounts/update_profile.html'
@@ -58,8 +59,11 @@ class ProfileView(DetailView):
     template_name = 'accounts/profile.html'
 
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return Profile.objects.filter(user=self.request.user).prefetch_related('user')
-        return Profile.objects.none()
+        # Allow viewing any profile, but use prefetch_related for efficiency
+        return Profile.objects.all().prefetch_related('user')
 
-# Remove the custom LogoutView class as we're using Django's built-in LogoutView
+
+    
+def logout_view(request):
+    logout(request)
+    return redirect('login')

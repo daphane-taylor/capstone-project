@@ -16,20 +16,51 @@
     <form method="post">
         {% csrf_token %}
         
-        {% if form.errors %}
+        {% if form.non_field_errors %}
         <div class="error-message">
-            {{ form.errors }}
+            {{ form.non_field_errors }}
         </div>
         {% endif %}
+        
         <div class="form-row">
-            <label for="username">Username:</label>
+            <label for="id_username">Username:</label>
             <input type="text" name="username" id="id_username" required>
+            {% if form.username.errors %}
+            <div class="error-message">{{ form.username.errors }}</div>
+            {% endif %}
             <small class="form-hint">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
         </div>
         
         <div class="form-row">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="id_password1" required>
+            <label for="id_first_name">First Name:</label>
+            <input type="text" name="first_name" id="id_first_name">
+            {% if form.first_name.errors %}
+            <div class="error-message">{{ form.first_name.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-row">
+            <label for="id_last_name">Last Name:</label>
+            <input type="text" name="last_name" id="id_last_name">
+            {% if form.last_name.errors %}
+            <div class="error-message">{{ form.last_name.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-row">
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" id="id_email">
+            {% if form.email.errors %}
+            <div class="error-message">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-row">
+            <label for="id_password">Password:</label>
+            <input type="password" name="password" id="id_password" required>
+            {% if form.password.errors %}
+            <div class="error-message">{{ form.password.errors }}</div>
+            {% endif %}
             <small class="form-hint">
                 Your password can't be too similar to your other personal information.
                 Your password must contain at least 8 characters.
@@ -39,8 +70,11 @@
         </div>
         
         <div class="form-row">
-            <label for="password-confirm">Confirm Password:</label>
-            <input type="password" name="password_confirm" id="id_password1" required>
+            <label for="id_password_confirm">Confirm Password:</label>
+            <input type="password" name="password_confirm" id="id_password_confirm" required>
+            {% if form.password_confirm.errors %}
+            <div class="error-message">{{ form.password_confirm.errors }}</div>
+            {% endif %}
             <small class="form-hint">Enter the same password as before, for verification.</small>
         </div>
         
@@ -50,8 +84,7 @@
     </form>
     
     <div class="links">
-        <p>Already have an account? <a href="{% url 'login' %}">login</a><br />
-        <a href="{% url 'password_change' %}" target="_self">forgot password</a></p>
+        <p>Already have an account? <a href="{% url 'login' %}">login</a></p>
     </div>
 </div>
 {% endblock content %}

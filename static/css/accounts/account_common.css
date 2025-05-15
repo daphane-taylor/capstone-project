@@ -1,0 +1,110 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 25px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.header h1, .header h2, .header h4 {
+	color: var(--heading-color);
+	margin: 0;
+	font-weight: 600;
+}
+
+form {
+	background-color: var(--transparent-background);
+	width: 100%;
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 25px;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+}
+
+.form-row {
+	margin-bottom: 20px;
+}
+
+.form-row label, .form-group label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 500;
+	color: var(--text-color);
+}
+
+.form-row input, .form-group input {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	background-color: white;
+	transition: var(--transition);
+}
+
+.form-row input:focus, .form-group input:focus {
+	outline: none;
+	border-color: var(--button-color);
+	box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+button, .form-actions button, a.btn {
+	padding: 12px 20px;
+	background-color: var(--button-color);
+	color: var(--secondary-text-color);
+	border: none;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	font-weight: 500;
+	transition: var(--transition);
+	text-align: center;
+	display: inline-block;
+	text-decoration: none;
+}
+
+button:hover, .form-actions button:hover, a.btn:hover {
+	background-color: var(--button-hover);
+}
+
+.links {
+	margin-top: 25px;
+	text-align: center;
+}
+
+.links a {
+	color: var(--button-color);
+	text-decoration: none;
+	transition: var(--transition);
+}
+
+.links a:hover {
+	text-decoration: underline;
+}
+
+.error-message {
+	color: var(--error-color);
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: rgba(220, 53, 69, 0.1);
+	border-radius: var(--border-radius);
+}
+
+small.form-hint {
+	display: block;
+	margin-top: 5px;
+	color: #6c757d;
+	font-size: 0.875rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+	form {
+	width: 95%;
+	padding: 15px;
+	}
+	
+	.form-row button, .form-actions button {
+	width: 100%;
+	}
+}

@@ -9,17 +9,32 @@
 
 {% block content %}
 <div class="profile-container">
-	<div class="profile">
-		<h1>{{ profile.user.username }}</h1>
-		<div class="info">
-			<p><strong>First Name:</strong> {{ user.first_name }}</p>
-			<p><strong>Last Name:</strong> {{ user.last_name }}</p>
-		</div>
+    <div class="profile">
+        <h1>{{ profile.user.username }}</h1>
+        <div class="info">
+            <p><strong>First Name:</strong> {{ profile.user.first_name|default:"Not provided" }}</p>
+            <p><strong>Last Name:</strong> {{ profile.user.last_name|default:"Not provided" }}</p>
+            <p><strong>Email:</strong> {{ profile.user.email|default:"Not provided" }}</p>
+            {% if profile.phone_number %}
+            <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+            {% endif %}
+            <p><strong>Address:</strong> {{ profile.street }}, {{ profile.city }}, {{ profile.state }} {{ profile.zip_code }}</p>
+        </div>
 
-		<div>
-			{% if profile.picture %}
-				<img src="{{ profile.picture.url }}" alt="Profile Picture" class="profile-picture">
-			{% endif %}
-		</div>
-	</div>
+        <div>
+            {% if profile.picture %}
+                <img src="{{ profile.picture.url }}" alt="Profile Picture" class="profile-picture">
+            {% else %}
+                <div class="no-picture">No profile picture available</div>
+            {% endif %}
+        </div>
+        
+        {% if user.is_authenticated and user.id == profile.user.id %}
+        <div class="profile-actions">
+            <a href="{% url 'update_profile' %}" class="btn">Update Profile</a>
+            <a href="{% url 'password_change' %}" class="btn">Change Password</a>
+        </div>
+        {% endif %}
+    </div>
 </div>
+{% endblock content %}

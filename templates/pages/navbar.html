@@ -7,17 +7,20 @@
     </div>
     
     <div class="main-navbar">
-        <nav>
-            <a class="nav-link" href="{% url 'home' %}">- dashboard</a>
-            <a class="nav-link" href="{% url 'item_list' %}">- view collection</a>
-            <a class="nav-link" href="{% url 'collection_list' %}">- manage collections</a>
-            <a class="nav-link" href="{% url 'note_list' %}">- view notes</a>
-            <a class="nav-link" href="#">- view reports</a>
-            <a class="nav-link" href="#">- archived records</a>
-            <a class="nav-link" href="{% url 'about' %}">- user guide</a>
-            <a class="nav-link" href="{% url 'contact' %}">- contact developer</a>
-        </nav>
+        <div>
+            <nav>
+                <a class="nav-link" href="{% url 'home' %}">- dashboard</a>
+                <a class="nav-link" href="{% url 'item_list' %}">- view collection</a>
+                <a class="nav-link" href="{% url 'collection_list' %}">- manage collections</a>
+                <a class="nav-link" href="{% url 'note_list' %}">- view notes</a>
+                <!-- <a class="nav-link" href="#">- archived records</a> -->
+                <a class="nav-link" href="{% url 'about' %}">- user guide</a>
+                <a class="nav-link" href="{% url 'contact' %}">- contact developer</a>
+            </nav>
+        </div>
     </div>
+
+    
     
     <!-- Mobile auth links - will appear at the bottom when menu is expanded -->
     <div class="mobile-auth-links">

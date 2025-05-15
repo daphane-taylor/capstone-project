@@ -1,60 +1,42 @@
 .signup-container {
 	background-color: var(--primary-color);
-	border: 2px solid var(--background-color);
-	border-radius: 2px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
 	width: 95%;
-	margin: 20px auto;
+	max-width: 800px;
+	margin: 30px auto;
+	padding: 30px;
+	box-shadow: var(--shadow);
 }
 
-.header{
+.signup-container .header {
 	width: 100%;
-    align-items: center;
-    padding: 0 20px 0 20px;
-    border-bottom: 1px solid var(--background-color);
+	align-items: center;
+	padding: 0 20px 15px 20px;
+	border-bottom: 1px solid var(--border-color);
 }
 
-form {
-	background-color: var(--transparent-background);
-	width: 60%;
-	margin: 10px auto;
-	padding: 20px;
-	border-bottom: 1px solid var(--background-color);
-	border-radius: 5px;
-
+.signup-container form {
+	width: 70%;
 }
 
-.form-row {
-	margin-bottom: 15px;
+.signup-container .form-hint {
+	font-size: 0.85rem;
+	color: #6c757d;
+	margin-top: 5px;
 }
 
-.form-row label {
-	display: block;
-	margin-bottom: 5px;
-}
-
-.form-row input {
-	background-color: white;
-	border: 1px solid var(--primary-color);
-	border-bottom: 1px solid var(--heading-color);
+@media (max-width: 768px) {
+	.signup-container {
+	padding: 20px 15px;
+	}
+	
+	.signup-container form {
 	width: 100%;
-	padding: 8px;
-}
-
-.form-row button {
-	padding: 10px 15px;
-	background-color: var(--button-color);
-	color: var(--secondary-text-color);
-	border: none;
-	cursor: pointer;
-	width: 100%;
-}
-
-.links {
-	margin-top: 20px;
-	text-align: center;
-}
-
-.error-message {
-	color: red;
-	margin-bottom: 15px;
+	padding: 15px;
+	}
+	
+	.signup-container .header {
+	padding: 0 10px 15px 10px;
+	}
 }

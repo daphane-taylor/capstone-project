@@ -1,14 +1,21 @@
 :root {
-	--text-color: #000000;
-	--secondary-text-color: #EDEBDF;
-	--background-color: #97968e;
-	--primary-color: #EDEBDF;
 	--link-color: #433c31;
-	--heading-color: #534e43;
-	--button-color: #534e43;
 	--danger-color: #8B4513;
-	--transparent-background: #b8af9ce7;
 	--hover-color: #ad9f80;
+	--primary-color: #f8f9fa;
+	--background-color: #e9ecef;
+	--heading-color: #343a40;
+	--text-color: #495057;
+	--secondary-text-color: #ffffff;
+	--button-color: #0d6efd;
+	--button-hover: #0b5ed7;
+	--border-color: #dee2e6;
+	--transparent-background: rgba(127, 123, 117, 0.649);
+	--success-color: #28a745;
+	--error-color: #dc3545;
+	--shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	--border-radius: 8px;
+	--transition: all 0.3s ease;
 
 	--nav-width-desktop: 20%;
 	--nav-width-tablet: 25%;
@@ -30,7 +37,7 @@ html {
 }
 
 body {
-	background-color: var(--background-color);
+	background-color: var(--link-color);
 	color: var(--text-color);
 }
 /* Page Container */
@@ -65,6 +72,21 @@ body {
 	position: sticky;
 	top: 0;
 	bottom: 0;
+}
+
+/*Main navbar*/
+.main-navbar {
+	display: flex;
+	align-items: flex-start;
+	font-variant: small-caps;
+	margin-top: 1rem;
+	width: 100%;
+	padding: 0 1.5rem;
+}
+
+.main-navbar a {
+	margin: 1rem 0;
+	font-size: 17px;
 }
 
 a {
