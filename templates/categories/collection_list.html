@@ -9,8 +9,8 @@
 
 {% block content %}
 <div class="categories-container">
-    <div class="collection-items">
-        <h1>Collections</h1>
+    <div class="header">
+        <h3>Collections</h3>
         {% if user.is_authenticated %}
         <div class="text">
             <a href="{% url 'collection_create' %}" class="btn">Create New Collection</a>
@@ -19,26 +19,35 @@
     </div>
     
     {% if collections %}
-        <div class="collection-grid">
-            {% for collection in collections %}
-            <div class="collection-card">
-                <div class="collection-header">
-                    <h3 class="collection-title">{{ collection.name }}</h3>
-                    <div class="collection-actions">
-                        <a href="{% url 'collection_detail' collection.pk %}" class="action-btn view-btn">View</a>
-                        {% if user.is_authenticated and user == collection.user %}
-                        <a href="{% url 'collection_update' collection.pk %}" class="action-btn edit-btn">Edit</a>
-                        <a href="{% url 'collection_delete' collection.pk %}" class="action-btn delete-btn">Delete</a>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="collection-meta">
-                    <p>{{ collection.item_count }} items</p>
-                    <p>Created: {{ collection.created_on|date:"M d, Y" }}</p>
-                </div>
-                <p>{{ collection.description|truncatechars:100 }}</p>
-            </div>
-            {% endfor %}
+        <div class="table-responsive">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Item Count</th>
+                        <th>Created On</th>
+                        <th class="action-title">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for collection in collections %}
+                    <tr>
+                        <td>{{ collection.name }}</td>
+                        <td>{{ collection.description|truncatechars:100|default:"--" }}</td>
+                        <td>{{ collection.item_count }}</td>
+                        <td>{{ collection.created_on|date:"M d, Y" }}</td>
+                        <td class="actions">
+                            <a href="{% url 'collection_detail' collection.pk %}" class="action-btn view-btn" title="View">View</a>
+                            {% if user.is_authenticated and user == collection.user %}
+                            <a href="{% url 'collection_update' collection.pk %}" class="action-btn edit-btn" title="Edit">Edit</a>
+                            <a href="{% url 'collection_delete' collection.pk %}" class="action-btn delete-btn" title="Delete">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     {% else %}
         <div class="no-items">

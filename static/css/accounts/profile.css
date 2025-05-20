@@ -15,7 +15,8 @@
 }
 
 .profile h1 {
-	color: var(--heading-color);
+	font-family: cursive;
+	color: var(--danger-color);
 	margin-bottom: 25px;
 	text-align: center;
 }
@@ -38,8 +39,8 @@
 }
 
 .profile-picture {
-	width: 200px;
-	height: 200px;
+	width: 300px;
+	height: 300px;
 	object-fit: cover;
 	border-radius: 50%;
 	border: 5px solid var(--border-color);
@@ -56,16 +57,16 @@
 }
 
 .profile-actions a {
+	font-size: 15px;
 	padding: 10px 20px;
 	text-decoration: none;
 	color: var(--secondary-text-color);
-	background-color: var(--button-color);
+	background-color: var(--link-color);
 	border-radius: var(--border-radius);
-	transition: var(--transition);
 }
 
 .profile-actions a:hover {
-	background-color: var(--button-hover);
+	background-color: var(--transparent-background);
 }
 
 .no-picture {

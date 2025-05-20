@@ -5,6 +5,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/categories/collection_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/items/item_list.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -53,7 +54,7 @@
                         {% if user.is_authenticated %}
                         <a href="{% url 'item_update' item.id %}" class="action-btn edit-btn">Edit</a>
                         {% if user == collection.user %}
-                        <form method="post" action="% url 'remove_from_collection' item_id=item.id collection_id=collection.id %" style="display:inline;">
+                        <form method="post" action="{% url 'remove_from_collection' item_id=item.id collection_id=collection.id %}" style="display:inline;">
                             {% csrf_token %}
                             <button type="submit" class="action-btn delete-btn">Remove</button>
                         </form>

@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from categories.models import Collection  # Import the Collection model from your collections app
+from categories.models import Collection  
 
 # Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=200)
-    other_names = models.CharField(max_length=300, blank=True)
+    other_names = models.CharField(max_length=300, blank=True, null=True)
     date_collected = models.DateField()
     value = models.CharField(max_length=20)
-    color = models.CharField(max_length=100)
+    vendor = models.CharField(max_length=50, null=True, blank=True)
+    color = models.CharField(max_length=100, null=True, blank=True)
     type = models.CharField(max_length=100)
-    size = models.CharField(max_length=50)
+    size = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField()
     image = models.ImageField(upload_to='items/', null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)

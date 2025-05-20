@@ -66,6 +66,65 @@
                 <div class="info-label">Description:</div>
                 <div class="info-value">{{ item.description }}</div>
             </div>
+            
+            {% if user.is_authenticated %}
+            <div class="collection-management">
+                <div class="info-row">
+                    <div class="info-label">Collections:</div>
+                    <div class="info-value">
+                        {% if item.collections.all %}
+                            {% for collection in item.collections.all %}
+                                <div class="collection-badge">
+                                    <a href="{% url 'collection_detail' collection.pk %}">{{ collection.name }}</a>
+                                    <form method="post" action="{% url 'remove_from_collection' item_id=item.id collection_id=collection.id %}" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="remove-badge">×</button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <span>Not in any collections</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                {% if user_collections %}
+                <div class="collection-forms">
+                    <div class="add-collection-form">
+                        <h4>Add to Collection</h4>
+                        <form method="post" action="{% url 'add_to_collection' item_id=item.id %}">
+                            {% csrf_token %}
+                            <select name="collection" required>
+                                <option value="">Select a Collection</option>
+                                {% for collection in user_collections %}
+                                    {% if collection not in item.collections.all %}
+                                        <option value="{{ collection.id }}">{{ collection.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="action-btn add-btn">Add</button>
+                        </form>
+                    </div>
+                    
+                    {% if item.collections.all %}
+                    <div class="remove-collection-form">
+                        <h4>Remove from Collection</h4>
+                        <form method="post" action="{% url 'remove_from_collection_form' item_id=item.id %}">
+                            {% csrf_token %}
+                            <select name="collection" required>
+                                <option value="">Select a Collection</option>
+                                {% for collection in item.collections.all %}
+                                    <option value="{{ collection.id }}">{{ collection.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="action-btn delete-btn">Remove</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -91,4 +150,8 @@
         </form>
     </div>
 </div>
+
+
 {% endblock content %}
+
+

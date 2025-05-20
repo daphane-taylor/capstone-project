@@ -38,6 +38,7 @@
 
 .items-table th {
     background-color: var(--primary-color);
+    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     font-variant: small-caps;
@@ -64,13 +65,13 @@
 }
 
 .view-btn {
-    background-color: var(--background-color);
+    background-color: var(--transparent-background);
     font-family: Candara, sans-serif;
     min-width: max-content;
 }
 
 .edit-btn {
-    background-color: var(--button-color);
+    background-color: var(--hover-color);
     font-family: Candara, sans-serif;
 
 }

@@ -22,9 +22,7 @@
     <div class="login-out-menu">
         <nav>
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' pk=user.profile.id %}" class="auth-link">{{ user.username }}</a>
-                <a href="{% url 'update_profile' %}" class="auth-link">update profile</a>
-                <a href="{% url 'password_change' %}" class="auth-link">change password</a>
+                <a href="{% url 'profile' pk=user.profile.id %}" class="auth-link">welcome, {{ user.username }}</a>
                 <a href="{% url 'logout' %}" class="auth-link">logout</a>
             {% else %}
                 <a href="{% url 'login' %}" class="auth-link">login</a>
@@ -45,7 +43,8 @@
                 <p class="card-value">
                     <a href="{% url 'item_list' %}">{{ total_items }}</a>
                 </p>
-                <p class="card-description">records in your collection</p>
+                <p class="card-description">records in your collection<br />
+                <a href="{% url 'item_create' %}">add new item</a></p>
             </div>
 
         
@@ -54,7 +53,8 @@
                 <p class="card-value">
                     <a href="{% url 'collection_list' %}">{{ total_collections }}</a>
                 </p>
-                <p class="card-description">collections in your database</p>
+                <p class="card-description">collections in your database<br />
+                <a href="{% url 'collection_create' %}">add new collection</a></p>
             </div>
 
         <div class="card">
@@ -62,9 +62,11 @@
             <p class="card-value">
                 <a href="{% url 'note_list' %}">{{ total_notes }}</a>
             </p>
-            <p class="card-description">notes in your collection</p>
+            <p class="card-description">notes in your collection<br />
+            <a href="{% url 'note_create' %}">add new note</a></p>
         </div>
     </div>
+
 
 <div class="recent-activity">
     <h3>Recent Activity</h3>
@@ -98,16 +100,4 @@
     {% endif %}
 </div>
 
-<div class="create-menu">
-    <nav>
-        <a href="{% url 'item_create' %}">add new item</a> |
-        <a href="{% url 'note_create' %}">add new note</a> |
-        <a href="">add new category</a> |
-        <a href="">add new collection</a>
-    </nav>
-</div>
 {% endblock content %}
-
-{% block js %}
-<script src="{% static 'js/home.js' %}"></script>
-{% endblock js %}

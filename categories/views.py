@@ -1,13 +1,13 @@
-from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Collection
-from items.models import Item
-from .forms import CollectionForm
+from items.models import Item, Activity
+from .forms import CollectionForm, ItemCollectionForm
 from django.contrib import messages
 
-# Create your views here.
+
 class CollectionListView(ListView):
     model = Collection
     template_name = 'categories/collection_list.html'
@@ -31,8 +31,14 @@ class CollectionDetailView(DetailView):
     
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return Collection.objects.filter(user=self.request.user).prefetch_related('items')
+            return Collection.objects.filter(user=self.request.user)
         return Collection.objects.none()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add items related to this collection to the context
+        context['items'] = self.object.items.all()
+        return context
 
 
 class CollectionCreateView(LoginRequiredMixin, CreateView):
@@ -82,3 +88,61 @@ class CollectionDeleteView(LoginRequiredMixin, DeleteView):
     
     def get_queryset(self):
         return Collection.objects.filter(user=self.request.user)
+
+
+class AddToCollectionView(LoginRequiredMixin, View):
+    def post(self, request, item_id):
+        item = get_object_or_404(Item, id=item_id)
+        collection_id = request.POST.get('collection')
+        
+        if collection_id:
+            collection = get_object_or_404(Collection, id=collection_id, user=request.user)
+            
+            if not item.collections.filter(id=collection.id).exists():
+                item.collections.add(collection)
+                
+                Activity.objects.create(
+                    user=request.user,
+                    item=item,
+                    activity_type='add_to_collection',
+                    collection=collection
+                )
+                
+                messages.success(request, f"Added '{item.name}' to collection '{collection.name}'")
+            else:
+                messages.info(request, f"'{item.name}' is already in collection '{collection.name}'")
+                
+        return redirect('item_detail', id=item_id)
+
+
+class RemoveFromCollectionView(LoginRequiredMixin, View):
+    def post(self, request, item_id, collection_id=None):
+        item = get_object_or_404(Item, id=item_id)
+        
+        
+        if collection_id:
+            collection = get_object_or_404(Collection, id=collection_id, user=request.user)
+            collections_to_remove = [collection]
+        else:
+            selected_collection_id = request.POST.get('collection')
+            if selected_collection_id:
+                collection = get_object_or_404(Collection, id=selected_collection_id, user=request.user)
+                collections_to_remove = [collection]
+            else:
+                messages.error(request, "No collection selected")
+                return redirect('item_detail', id=item_id)
+        
+        for collection in collections_to_remove:
+            if item.collections.filter(id=collection.id).exists():
+                item.collections.remove(collection)
+                
+                Activity.objects.create(
+                    user=request.user,
+                    item=item,
+                    activity_type='remove_from_collection',
+                    collection=collection
+                )
+                
+                messages.success(request, f"Removed '{item.name}' from collection '{collection.name}'")
+        
+        return redirect('item_detail', id=item_id)

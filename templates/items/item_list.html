@@ -22,20 +22,20 @@
             <table class="items-table">
                 <thead>
 					<tr>
-						<th>Date Collected</th>
-                        <th>Name</th>
-                        <th>A.K.A</th>
-						<th>Color</th>
-                        <th>Type</th>
-                        <th>Size</th>
-						<th>Value</th>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>a.k.a</th>
+						<th>color</th>
+                        <th>type</th>
+                        <th>size</th>
+						<th>value</th>
                         <th class="action-title">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in items %}
                     <tr>
-						<td>{{ item.date_collected }}</td>
+                        <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.other_names }}</td>
                         <td>{{ item.color }}</td>

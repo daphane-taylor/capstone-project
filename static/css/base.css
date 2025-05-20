@@ -45,6 +45,7 @@ body {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	min-height: 100vh;
 }
 
 /* Content container */
@@ -53,7 +54,7 @@ body {
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	width: 100%;
+	width: var(--content-width-desktop);
 	min-height: 100vh;
 }
 
@@ -72,6 +73,7 @@ body {
 	position: sticky;
 	top: 0;
 	bottom: 0;
+	overflow-y: auto;
 }
 
 /*Main navbar*/
@@ -195,76 +197,130 @@ h6 {
 	padding: 0.5rem 0;
 }
 
-/* Media query for mobile */
+/* Tablet Media Query */
+@media screen and (max-width: 992px) {
+	.navigation-panel {
+		width: var(--nav-width-tablet);
+	}
+	
+	.content-container {
+		width: var(--content-width-tablet);
+	}
+	
+	.main-navbar {
+		padding: 0 1rem;
+	}
+	
+	.main-navbar a {
+		font-size: 16px;
+	}
+}
+
+/* Mobile Media Query */
 @media screen and (max-width: 768px) {
 	.dashboard-container {
-	flex-direction: column;
+		flex-direction: column;
 	}
 	
 	.navigation-panel {
-	width: var(--nav-width-mobile);
-	height: auto;
-	position: relative;
-	padding-bottom: 0;
+		width: var(--nav-width-mobile);
+		height: auto;
+		position: relative;
+		padding-bottom: 0;
 	}
 	
 	/* Show hamburger label on mobile */
 	.hamburger-label {
-	display: block;
+		display: block;
 	}
 	
 	/* Hide navigation by default on mobile */
 	.navigation-panel .main-navbar {
-	display: none;
+		display: none;
 	}
 	
 	/* Show navigation when checkbox is checked */
 	#nav-toggle:checked ~ .dashboard-container .navigation-panel .main-navbar {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
 	}
 	
 	/* Make nav links stack vertically on mobile */
 	.main-navbar nav {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
 	}
 	
 	/* Style mobile auth links to display at bottom of menu */
 	.mobile-auth-links {
-	display: none; /* Still hidden by default */
-	border-top: 1px solid var(--background-color);
-	margin-top: 1rem;
-	padding-top: 1rem;
+		display: none; /* Still hidden by default */
+		border-top: 1px solid var(--background-color);
+		margin-top: 1rem;
+		padding-top: 1rem;
 	}
 	
 	/* Show mobile auth links when menu is expanded */
 	#nav-toggle:checked ~ .dashboard-container .navigation-panel .mobile-auth-links {
-	display: flex;
+		display: flex;
 	}
 	
 	/* Hide desktop login-out-menu on mobile */
 	.search-panel .login-out-menu {
-	display: none;
+		display: block;
 	}
 	
 	.content-container {
-	width: var(--content-width-mobile);
+		width: var(--content-width-mobile);
 	}
 	
 	/* Ensure search bar remains visible */
 	.search-panel {
-	flex-direction: column;
-	align-items: flex-start;
+		flex-direction: column;
+		align-items: flex-start;
 	}
 	
 	form.d-flex {
-	width: 100%;
+		width: 100%;
 	}
 	
 	.input-group {
-	width: 100%;
+		width: 100%;
+	}
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+	html {
+		font-size: 13px;
+	}
+	
+	.nav-header {
+		padding: 0.8rem;
+	}
+	
+	.nav-header h3 {
+		font-size: 1.2rem;
+	}
+	
+	.hamburger-label {
+		width: 25px;
+		height: 18px;
+	}
+	
+	.main-navbar a {
+		font-size: 15px;
+		margin: 0.7rem 0;
+	}
+	
+	.mobile-auth-links .auth-link {
+		font-size: 14px;
+		padding: 0.4rem 0;
+	}
+	
+	/* Optimize touch targets for small screens */
+	a, button, .btn, input[type="submit"] {
+		padding: 0.5rem;
 	}
 }
