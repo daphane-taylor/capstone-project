@@ -1,4 +1,23 @@
-/* Activity list styling */
+/* Recent activity */
+.recent-activity {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: var(--primary-color);
+	border: 2px solid var(--background-color);
+	border-radius: 2px;
+	width: 100%;
+	height: calc(100vh - 329px);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.recent-activity h2, .recent-activity h3 {
+	padding: 1rem 0 0.5rem 1rem;
+	align-self: flex-start;
+}
+
 .activity-list {
     display: flex;
     flex-direction: column; 
@@ -68,8 +87,13 @@
 
 /* Mobile adjustments for activity items */
 @media screen and (max-width: 768px) {
+    .activity-list {
+        width: 95%;
+    }
+    
     .activity-item {
         flex-wrap: wrap;
+        padding: 8px 10px;
     }
     
     .activity-icon {
@@ -84,5 +108,31 @@
         width: 100%;
         margin-top: 0.5rem;
         text-align: right;
+        font-size: 0.8em;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+    .activity-list {
+        width: 98%;
+        gap: 8px;
+    }
+    
+    .activity-item {
+        padding: 8px;
+    }
+    
+    .activity-icon {
+        margin-right: 0.4rem;
+        font-size: 1rem;
+    }
+    
+    .activity-user, .activity-action, .activity-object {
+        font-size: 0.9rem;
+    }
+    
+    .activity-time {
+        font-size: 0.75em;
     }
 }

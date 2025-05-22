@@ -1,0 +1,30 @@
+.collection-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	border-bottom: 1px solid var(--background-color);
+	padding-bottom: 15px;
+}
+
+.collection-info h1 {
+	margin-bottom: 10px;
+}
+
+.collection-meta {
+	color: var(--text-color);
+	font-size: 0.9rem;
+}
+
+.collection-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.no-items-message {
+	text-align: center;
+	padding: 30px;
+	background-color: var(--primary-color);
+	border-radius: 8px;
+	margin-top: 20px;
+}

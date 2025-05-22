@@ -19,10 +19,17 @@
 	width: 70%;
 }
 
+.login-container form .form-row {
+	margin-bottom: 20px;
+}
+
 .login-container .form-row button {
 	margin-top: 10px;
 }
 
+.user-label, .pw-label {
+	margin-bottom: 5px;
+}
 @media (max-width: 768px) {
 	.login-container {
 	padding: 20px 15px;

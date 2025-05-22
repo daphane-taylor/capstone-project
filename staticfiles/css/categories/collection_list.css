@@ -1,24 +1,21 @@
-.items-container {
-    width: 95%;
+.categories-container {
+	width: 95%;
+	height: 97vh;
+	overflow: auto;
+	scrollbar-width: 0;
     padding: 20px;
     background-color: var(--primary-color);
     border-radius: 8px;
     margin: 20px auto;
 }
 
-.collection-items {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--background-color);
-}
-
-.text {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: -15px;
-    margin-top: 20px;
+    padding-bottom: 15px;
 }
 
 .items-table {
@@ -38,7 +35,6 @@
 
 .items-table th {
     background-color: var(--primary-color);
-    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     font-variant: small-caps;
@@ -47,16 +43,16 @@
 .items-table td {
     text-align: center;
 }
+
 .items-table tr:hover {
     background-color: var(--transparent-background);
 }
 
 .actions {
     display: flex;
-    justify-content: center;;
+    justify-content: center;
     gap: 10px;
 }
-
 .action-btn {
     padding: 5px 10px;
     border-radius: 4px;
@@ -65,15 +61,14 @@
 }
 
 .view-btn {
-    background-color: var(--transparent-background);
-    font-family: Candara, sans-serif;
+	background-color: var(--transparent-background);
+	font-family: Candara, sans-serif;
     min-width: max-content;
 }
 
 .edit-btn {
-    background-color: var(--hover-color);
+	background-color: var(--hover-color);
     font-family: Candara, sans-serif;
-
 }
 
 .delete-btn {

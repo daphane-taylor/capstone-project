@@ -1,4 +1,4 @@
-/* Full-width item_form.css to match the item details style */
+/* Removed unused/duplicate rules. Only styles for classes and elements used in the form remain. */
 
 .form-container {
     padding: 20px;
@@ -30,12 +30,6 @@
     max-width: 100%;
 }
 
-/* Form grid for create page - full width */
-form input {
-    background-color: #ffffff;
-    border: 1px solid var(--heading-color);
-    border-radius: 2px;
-}
 .form-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -59,14 +53,12 @@ form input {
     grid-column: span 4;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .field-half, .field-third {
         grid-column: span 12;
     }
 }
 
-/* Form row for update page - full width */
 .form-row {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +75,6 @@ form input {
     padding-left: 10px;
 }
 
-/* Simple column sizes - better for full width */
 .col-12 {
     flex: 0 0 100%;
     max-width: 100%;
@@ -94,14 +85,12 @@ form input {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
     }
-    
     .col-md-6 {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
-/* Form field styles */
 label {
     display: block;
     margin-bottom: 5px;
@@ -138,7 +127,6 @@ textarea {
     margin-bottom: 20px;
 }
 
-/* Form buttons */
 .form-buttons {
     display: flex;
     justify-content: flex-end;
@@ -147,7 +135,6 @@ textarea {
     width: 100%;
 }
 
-/* Button styles */
 .button, .btn {
     display: inline-block;
     font-weight: 400;
@@ -172,17 +159,17 @@ textarea {
 }
 
 .cancel-btn {
-	color: #fff;
-	background-color: var(--danger-color);
-	border: 1px solid var(--danger-color);
+    color: #fff;
+    background-color: var(--danger-color);
+    border: 1px solid var(--danger-color);
 }
 
 .create-btn {
-	color: #fff;
-	background-color: var(--background-color);
-	border: 1px solid var(--background-color);
+    color: #fff;
+    background-color: var(--link-color);
+    border: 1px solid var(--link-color);
 }
-/* Current image container */
+
 .current-image {
     margin-bottom: 10px;
 }
@@ -203,13 +190,10 @@ textarea {
     margin: 0;
 }
 
-/* Make sure desktop layout uses full width by default */
 @media (min-width: 768px) {
     .item-form {
         width: 100%;
     }
-    
-    /* Override the 60% max-width in your existing CSS */
     .item-form[style*="max-width: 60%"] {
         max-width: 100% !important;
     }

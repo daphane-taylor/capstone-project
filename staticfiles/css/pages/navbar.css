@@ -45,7 +45,7 @@
 }
 
 .nav-link:hover {
-    background-color: var(--background-color);
+    background-color: var(--transparent-background);
     color: var(--secondary-text-color);
     text-decoration: none !important;
     transform: translateX(5px);
