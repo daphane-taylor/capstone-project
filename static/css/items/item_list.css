@@ -64,6 +64,14 @@
     color: white;
 }
 
+.create-btn {
+    border: 1px solid var(--transparent-background);
+    border-radius: 8px;
+    background-color: var(--transparent-background);
+    padding: 5px 10px;
+
+}
+
 .view-btn {
     background-color: var(--transparent-background);
     font-family: Candara, sans-serif;
@@ -89,8 +97,15 @@
 }
 
 /* Responsive table */
+@media (max-width: 993px) {
+    .color-responsive,
+    .edit-btn {
+        display: none;
+    } 
+}
+
 @media (max-width: 768px) {
     .table-responsive {
-        overflow-x: auto;
+        width: 100vw;
     }
 }

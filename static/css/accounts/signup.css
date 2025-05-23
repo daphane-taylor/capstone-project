@@ -3,27 +3,9 @@
 	border: 1px solid var(--border-color);
 	border-radius: var(--border-radius);
 	width: 95%;
-	max-width: 800px;
 	margin: 30px auto;
 	padding: 30px;
 	box-shadow: var(--shadow);
-}
-
-.signup-container .header {
-	width: 100%;
-	align-items: center;
-	padding: 0 20px 15px 20px;
-	border-bottom: 1px solid var(--border-color);
-}
-
-.signup-container form {
-	width: 70%;
-}
-
-.signup-container .form-hint {
-	font-size: 0.85rem;
-	color: #6c757d;
-	margin-top: 5px;
 }
 
 @media (max-width: 768px) {
